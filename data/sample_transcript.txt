@@ -1,0 +1,29 @@
+Salesperson:
+Hello.
+
+Customer:
+Hi.
+
+Salesperson:
+Tell me about your inventory.
+
+Customer:
+We currently use Excel.
+
+Salesperson:
+What's your biggest challenge?
+
+Customer:
+It takes too much time and we lose track of products.
+
+Salesperson:
+What's your budget?
+
+Customer:
+Around $20,000.
+
+Salesperson:
+When would you like to implement this?
+
+Customer:
+Within 3 months.
