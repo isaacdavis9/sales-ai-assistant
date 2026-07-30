@@ -116,7 +116,21 @@ def get_all_meetings():
 
     conn = sqlite3.connect("database/meetings.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM meetings")
+    cursor.execute("""
+        SELECT 
+            meetings.id,
+            meetings.company_name,
+            meetings.summary,
+            meeting_insights.pain_points,
+            meeting_insights.buying_signals,
+            meeting_insights.objections,
+            meeting_insights.next_steps,
+            meetings.opportunity_score,
+            meetings.followup_email
+        FROM meetings
+        LEFT JOIN meeting_insights 
+        ON meetings.id = meeting_insights.meeting_id
+    """)
     rows = cursor.fetchall()
     conn.close()
     
@@ -169,7 +183,7 @@ def get_company_count():
     conn = sqlite3.connect("database/meetings.db")
     cursor = conn.cursor()
     cursor.execute("""
-    SELECT COUNT(DISTINCT customer_name) 
+    SELECT COUNT(DISTINCT company_name) 
     FROM meetings
     """)
     count = cursor.fetchone()[0]
