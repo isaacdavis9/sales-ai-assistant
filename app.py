@@ -10,7 +10,7 @@ from dashboard import show_dashboard
 create_database()
 
 st.title("Sales AI Assistant")
-st.subheader("Use the sidebar to navigate between different sections.")
+st.caption("Use the sidebar to navigate between different sections.")
 page = st.sidebar.selectbox(
     "Navigation",
     [
