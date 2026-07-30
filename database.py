@@ -73,3 +73,49 @@ def get_meeting(id):
     conn.close()
 
     return row
+
+
+def get_total_meetings():
+    conn = sqlite3.connect("database/meetings.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM meetings")
+    total = cursor.fetchone()[0]
+    conn.close()
+
+    return total
+
+def get_average_score():
+    conn = sqlite3.connect("database/meetings.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT AVG(opportunity_score) 
+    FROM meetings
+    """)
+    average = cursor.fetchone()[0]
+    conn.close()
+
+    return round(average or 0, 1)
+
+def get_highest_score():
+    conn = sqlite3.connect("database/meetings.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT MAX(opportunity_score) 
+    FROM meetings
+    """)
+    highest = cursor.fetchone()[0]
+    conn.close()
+
+    return highest or 0
+
+def get_company_count():
+    conn = sqlite3.connect("database/meetings.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT COUNT(DISTINCT customer_name) 
+    FROM meetings
+    """)
+    count = cursor.fetchone()[0]
+    conn.close()
+
+    return count
